@@ -1,15 +1,17 @@
-apiVersion: apps/v1
+piVersion: apps/v1
 kind: Deployment
 metadata:
 name: hello
 labels:
   app: hello
+spec:
+strategy:
+  type: Recreate
 template:
   metadata:
     labels:
-      matchLabels:
-        app: hello
-        tier: hello
+      app: hello
+      tier: hello
   spec:
     containers:
     - name: hello
@@ -31,7 +33,6 @@ ports:
   - port: 5000
     targetPort: 5000
 selector:
-   matchLabels:
-     app: hello
-     tier: hello
+  app: hello
+  tier: hello
 type: LoadBalancer
