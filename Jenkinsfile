@@ -1,9 +1,9 @@
 pipeline {
     agent any
     environment {
-        PROJECT_ID = 'PROJECT-ID'
-        CLUSTER_NAME = 'CLUSTER-NAME'
-        LOCATION = 'CLUSTER-LOCATION'
+        PROJECT_ID = 'neural-mantra-303016'
+        CLUSTER_NAME = 'My First Project'
+        LOCATION = 'us-central1-a'
         CREDENTIALS_ID = 'gke'
     }
     stages {
@@ -15,7 +15,7 @@ pipeline {
         stage("Build image") {
             steps {
                 script {
-                    myapp = docker.build("DOCKER-HUB-USERNAME/hello:${env.BUILD_ID}")
+                    myapp = docker.build("kiranug/hello:${env.BUILD_ID}")
                 }
             }
         }
