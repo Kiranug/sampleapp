@@ -6,9 +6,10 @@ labels:
   app: hello
 spec:
 strategy:
-  rollingUpdate:
-    maxSurge: 25%
-    maxUnavailable: 25%
+  type: Recreate
+	selector:	
+    matchLabels:	
+      app: hello
 template:
   metadata:
     labels:
