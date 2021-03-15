@@ -39,6 +39,7 @@ ports:
   - port: 5000
     targetPort: 5000
 selector:
-  app: hello
-  tier: hello
+  matchLabels:
+    app: hello
+    tier: hello
 type: LoadBalancer
