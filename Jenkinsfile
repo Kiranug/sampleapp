@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         PROJECT_ID = 'neural-mantra-303016'
-        CLUSTER_NAME = 'My First Project'
+        CLUSTER_NAME = 'mycluster'
         LOCATION = 'us-central1-a'
         CREDENTIALS_ID = 'gke'
     }
