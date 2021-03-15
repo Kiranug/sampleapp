@@ -1,21 +1,45 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
-  labels:
-    app: nginx
+ name: hello
+ labels:
+  app: hello
 spec:
-  replicas: 3
-  selector:
+ selector:
     matchLabels:
-      app: nginx
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-      - name: nginx
-        image: nginx:1.14.2
-        ports:
-        - containerPort: 80
+      app: hello
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+template:
+  metadata:
+   labels:
+      app: hello
+      tier: hello
+  spec:
+    containers:
+    - name: hello
+      image: kiranug/hello:latest
+      imagePullPolicy: Always
+      ports:
+      - containerPort: 5000
+        name: hello
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+name: hello
+labels:
+  app: hello
+spec:
+ports:
+  - port: 5000
+    targetPort: 5000
+selector:
+  matchLabels:
+    app: hello
+    tier: hello
+type: LoadBalancer
