@@ -2,9 +2,9 @@ pipeline {
     agent any
     environment {
         PROJECT_ID = 'neural-mantra-303016'
-        CLUSTER_NAME = 'mycluster'
+        CLUSTER_NAME = 'cluster1'
         LOCATION = 'us-central1-a'
-        CREDENTIALS_ID = 'gke'
+        CREDENTIALS_ID = 'jenkinsgke'
     }
     stages {
         stage("Checkout code") {
