@@ -1,39 +1,39 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: hello-world-rest-api
-  name: hello-world-rest-api
-  namespace: default
+ name: hello
+ labels:
+  app: hello
 spec:
-  replicas: 2
-  revisionHistoryLimit: 10
-  selector:
+ selector:
     matchLabels:
-      app: hello-world-rest-api
+      app: hello
   strategy:
     rollingUpdate:
       maxSurge: 25%
       maxUnavailable: 25%
     type: RollingUpdate
-  template:
-    metadata:
-      labels:
-        app: hello-world-rest-api
-    spec:
-      containers:
-      - image: in28min/hello-world-rest-api:0.0.3.RELEASE
-        imagePullPolicy: IfNotPresent
-        name: hello-world-rest-api
-      restartPolicy: Always
-      terminationGracePeriodSeconds: 30
----      
+template:
+  metadata:
+   labels:
+      app: hello
+      tier: hello
+  spec:
+    containers:
+    - name: hello
+      image: kiranug/hello:latest
+      imagePullPolicy: Always
+      ports:
+      - containerPort: 5000
+        name: hello
+
+---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: hello-world-rest-api
-  name: hello-world-rest-api
+    app: hello
+  name: hello
   namespace: default
 spec:
   ports:
@@ -42,6 +42,6 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    app: hello-world-rest-api
+    app: hello
   sessionAffinity: None
   type: LoadBalancer
