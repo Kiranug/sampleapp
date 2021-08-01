@@ -1,6 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata:
+ametadata:
  name: hello
  labels:
   app: hello
@@ -8,7 +8,7 @@ spec:
  selector:
     matchLabels:
       app: hello
-  strategy:
+ strategy:
     rollingUpdate:
       maxSurge: 25%
       maxUnavailable: 25%
