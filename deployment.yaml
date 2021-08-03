@@ -1,6 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
-ametadata:
+metadata:
  name: hello
  labels:
   app: hello
