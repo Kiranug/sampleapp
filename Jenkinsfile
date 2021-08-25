@@ -9,7 +9,7 @@ pipeline {
         PROJECT_ID_UAT = 'mims-324019'
         CLUSTER_NAME_UAT = 'cluster-2'
         LOCATION_UAT = 'us-east1-b'
-        CREDENTIALS_ID_UAT = 'My First Project'
+        CREDENTIALS_ID_UAT = 'Mims'
     }
     stages {
         stage("Checkout code") {
