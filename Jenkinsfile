@@ -4,7 +4,7 @@ pipeline {
         PROJECT_ID = 'neural-mantra-303016'
         CLUSTER_NAME = 'cluster-1'
         LOCATION = 'us-central1-a'
-        CREDENTIALS_ID = 'gcp_connect'
+        CREDENTIALS_ID = 'My First Project'
     }
     stages {
         stage("Checkout code") {
