@@ -1,10 +1,15 @@
 pipeline {
     agent any
     environment {
-        PROJECT_ID = 'neural-mantra-303016'
-        CLUSTER_NAME = 'cluster-1'
-        LOCATION = 'us-central1-a'
-        CREDENTIALS_ID = 'My First Project'
+        PROJECT_ID_DEV = 'neural-mantra-303016'
+        CLUSTER_NAME_DEV = 'cluster-1'
+        LOCATION_DEV = 'us-central1-a'
+        CREDENTIALS_ID_DEV = 'My First Project'
+        
+        PROJECT_ID_UAT = 'mims-324019'
+        CLUSTER_NAME_UAT = 'cluster-2'
+        LOCATION_UAT = 'us-east1-b'
+        CREDENTIALS_ID_UAT = 'My First Project'
     }
     stages {
         stage("Checkout code") {
@@ -31,10 +36,16 @@ pipeline {
                 }
             }
         }        
-        stage('Deploy to GKE') {
+        stage('Deploy to GKE DEV') {
             steps{
                 sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' deployment.yaml"
-                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID_DEV, clusterName: env.CLUSTER_NAME_DEV, location: env.LOCATION_DEV, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID_DEV, verifyDeployments: true])
+            }
+        }
+           stage('Deploy to GKE UAT') {
+            steps{
+                sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' deployment.yaml"
+                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID_DEV, clusterName: env.CLUSTER_NAME_DEV, location: env.LOCATION_DEV, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID_DEV, verifyDeployments: true])
             }
         }
     }    
