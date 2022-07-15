@@ -1,10 +1,10 @@
 pipeline {
     agent any
     environment {
-        PROJECT_ID_DEV = 'neural-mantra-303016'
-        CLUSTER_NAME_DEV = 'cluster-1'
+        PROJECT_ID_DEV = 'terraformproject01'
+        CLUSTER_NAME_DEV = 'teams-dev-us-central1'
         LOCATION_DEV = 'us-central1-a'
-        CREDENTIALS_ID_DEV = 'My First Project'
+        CREDENTIALS_ID_DEV = 'gcp-login'
         
         PROJECT_ID_UAT = 'mims-324019'
         CLUSTER_NAME_UAT = 'cluster-2'
@@ -38,15 +38,16 @@ pipeline {
         }        
         stage('Deploy to GKE DEV') {
             steps{
-                sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' deployment.yaml"
+                sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' deployment0.yaml"
                 step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID_DEV, clusterName: env.CLUSTER_NAME_DEV, location: env.LOCATION_DEV, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID_DEV, verifyDeployments: true])
             }
         }
+        /*
            stage('Deploy to GKE UAT') {
             steps{
                 sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' deployment.yaml"
                 step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID_UAT, clusterName: env.CLUSTER_NAME_UAT, location: env.LOCATION_UAT, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID_UAT, verifyDeployments: true])
-            }
+            } */
         }
     }    
 }
