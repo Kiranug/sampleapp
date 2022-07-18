@@ -4,7 +4,7 @@ pipeline {
         PROJECT_ID_DEV = 'terraformproject01'
         CLUSTER_NAME_DEV = 'teams-dev-us-central1'
         LOCATION_DEV = 'us-central1-a'
-        CREDENTIALS_ID_DEV = 'gcp-login'
+        CREDENTIALS_ID_DEV = 'terraformproject01'
         
         PROJECT_ID_UAT = 'mims-324019'
         CLUSTER_NAME_UAT = 'cluster-2'
