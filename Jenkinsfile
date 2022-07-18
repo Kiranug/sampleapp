@@ -42,12 +42,5 @@ pipeline {
                 step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID_DEV, clusterName: env.CLUSTER_NAME_DEV, location: env.LOCATION_DEV, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID_DEV, verifyDeployments: true])
             }
         }
-        
-           stage('Deploy to GKE UAT') {
-            steps{
-                sh "sed -i 's/hello:latest/hello:${env.BUILD_ID}/g' deployment.yaml"
-                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID_UAT, clusterName: env.CLUSTER_NAME_UAT, location: env.LOCATION_UAT, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID_UAT, verifyDeployments: true])
-            } 
-        }
     }    
 }
